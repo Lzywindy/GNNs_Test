@@ -39,3 +39,29 @@ class GCN_CompressFeatures:
     def forward(self,node_features):
         feature_compress = self.__feature_compress_activition(torch.mm(self.__W_feature_compress,node_features))
         return self.__leakyrelu(torch.mm(feature_compress,torch.div(self.__W_edge + torch.transpose(self.__W_edge,0,1),2)))
+# 有向图卷积
+class GDCN:
+    def __init__(self,node_count:int, alpha:float):
+        self.__node_count = node_count
+        self.__W_edge = nn.Parameter(torch.zeros(size=(node_count, node_count)))
+        nn.init.xavier_uniform_(__W_edge, gain=1.414)
+        self.__alpha = alpha
+        self.__leakyrelu = nn.LeakyReLU(self.alpha)
+    def forward(self,node_features):
+        return self.__leakyrelu(torch.mm(node_features,torch.div(self.__W_edge + torch.transpose(self.__W_edge,0,1),2)))
+
+# 有向图卷积
+# 这个GCN是可以扩充或压缩节点特征（单纯变换可以来做残差模块）
+class GDCN_CompressFeatures:
+    def __init__(self,node_count:int,input_feature_N:int,output_feature_N:int, alpha:float):
+        self.__node_count = node_count
+        self.__feature_compress_activition = nn.ELU(0.3)
+        self.__W_feature_compress = nn.Parameter(torch.zeros(size=(input_feature_N, output_feature_N)))
+        nn.init.xavier_uniform_(__W_feature_compress, gain=1.414)
+        self.__W_edge = nn.Parameter(torch.zeros(size=(node_count, node_count)))
+        nn.init.xavier_uniform_(__W_edge, gain=1.414)
+        self.__alpha = alpha
+        self.__leakyrelu = nn.LeakyReLU(self.alpha)
+    def forward(self,node_features):
+        feature_compress = self.__feature_compress_activition(torch.mm(self.__W_feature_compress,node_features))
+        return self.__leakyrelu(torch.mm(feature_compress,torch.div(self.__W_edge + torch.transpose(self.__W_edge,0,1),2)))

@@ -13,6 +13,7 @@
     <Name>GNNs_Test</Name>
     <RootNamespace>Test_1</RootNamespace>
     <TestFramework>Pytest</TestFramework>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
