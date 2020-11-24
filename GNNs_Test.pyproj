@@ -29,6 +29,9 @@
     <Compile Include="DatasetProcess.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GAT.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GCN.py">
       <SubType>Code</SubType>
     </Compile>
