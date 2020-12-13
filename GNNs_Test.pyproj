@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataManager.py" />
+    <Compile Include="DataRead\ReadDataSets.py" />
     <Compile Include="DatasetFiles.py" />
     <Compile Include="DatasetProcess.py">
       <SubType>Code</SubType>
@@ -45,6 +46,9 @@
     <Compile Include="Vertex_PeMS.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataRead\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
